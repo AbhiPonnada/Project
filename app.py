@@ -3,6 +3,8 @@ import pandas as pd
 import google.generativeai as palm
 from docx import Document
 import os
+from flask import send_file
+import shutil
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'
@@ -145,3 +147,10 @@ def get_scope_suggestion(summary_text):
         max_output_tokens=300
     )
     return response.result
+
+@app.route('/download')
+def download_output():
+    output_folder = 'output'
+    zip_file = 'results.zip'
+    shutil.make_archive('results', 'zip', output_folder)
+    return send_file(zip_file, as_attachment=True, download_name='results.zip')
