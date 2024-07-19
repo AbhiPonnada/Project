@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Questionnaire</title>
+  <style>
+    body {
+      background-color: #f2f2f2;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    .logo {
+      font-size: 6rem;
+      font-weight: bold;
+      color: #4285f4;
+      letter-spacing: 5px;
+      margin-bottom: 2rem;
+    }
+
+    .search-bar {
+      display: flex;
+      align-items: center;
+      padding: 1rem;
+      border-radius: 3rem;
+      background-color: #fff;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      margin-bottom: 2rem;
+    }
+
+    .search-icon {
+      margin-right: 1rem;
+    }
+
+    .search-input {
+      border: none;
+      outline: none;
+      font-size: 1.2rem;
+      flex: 1;
+    }
+
+    .shortcuts {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-gap: 1rem;
+      max-width: 800px;
+    }
+
+    .shortcut {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      border-radius: 1rem;
+      background-color: #fff;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      text-decoration: none;
+      color: inherit;
+      transition: background-color 0.3s;
+    }
+
+    .shortcut:hover {
+      background-color: #f0f0f0;
+    }
+
+    .shortcut-icon {
+      font-size: 2rem;
+    }
+
+    .shortcut-label {
+      margin-top: 0.5rem;
+      font-size: 0.9rem;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="logo">NTT Data</div>
+    <div class="search-bar">
+      <i class="search-icon fa fa-search"></i>
+      <input type="text" class="search-input" placeholder="Search Module...">
+      <i class="fa fa-microphone"></i>
+      <i class="fa fa-camera"></i>
+    </div>
+    <div class="shortcuts">
+      <a href="/start" class="shortcut">
+        <i class="shortcut-icon fa fa-eye-slash"></i>
+        <div class="shortcut-label">Start Here</div>
+      </a>
+      <a href="/landscape" class="shortcut">
+        <i class="shortcut-icon fa fa-youtube"></i>
+        <div class="shortcut-label">Landscape Details</div>
+      </a>
+      <a href="/control" class="shortcut">
+        <i class="shortcut-icon fa fa-code"></i>
+        <div class="shortcut-label">Controlling,Treasury</div>
+      </a>
+      <a href="/materials" class="shortcut">
+        <i class="shortcut-icon fa fa-envelope"></i>
+        <div class="shortcut-label">Material Management</div>
+      </a>
+      <a href="/production" class="shortcut">
+        <i class="shortcut-icon fa fa-bolt"></i>
+        <div class="shortcut-label">Production Planning</div>
+      </a>
+      <a href="/quality" class="shortcut">
+        <i class="shortcut-icon fa fa-comments"></i>
+        <div class="shortcut-label">Quality Management</div>
+      </a>
+      <a href="/sales" class="shortcut">
+        <i class="shortcut-icon fa fa-eye-slash"></i>
+        <div class="shortcut-label">Sales Distribution</div>
+      </a>
+      <a href="/warehouse" class="shortcut">
+        <i class="shortcut-icon fa fa-graduation-cap"></i>
+        <div class="shortcut-label">Warehouse Management</div>
+      </a>
+      <a href="/plant" class="shortcut">
+        <i class="shortcut-icon fa fa-code-branch"></i>
+        <div class="shortcut-label">Plant Maintanence</div>
+      </a>
+      <a href="/finance" class="shortcut">
+        <i class="shortcut-icon fa fa-robot"></i>
+        <div class="shortcut-label">Finance</div>
+      </a>
+      <a href="/transportation" class="shortcut">
+        <i class="shortcut-icon fa fa-plus"></i>
+        <div class="shortcut-label">Transportation Management</div>
+      </a>
+      <a href="/project" class="shortcut">
+        <i class="shortcut-icon fa fa-eye-slash"></i>
+        <div class="shortcut-label">Project Systems</div>
+      </a>
+    </div>
+  </div>
+  <script src="https://kit.fontawesome.com/your-font-awesome-kit-id.js" crossorigin="anonymous"></script>
+</body>
+</html>
