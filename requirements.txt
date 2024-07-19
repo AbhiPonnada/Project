@@ -1,0 +1,8 @@
+Flask
+numpy
+pandas
+google-generativeai
+python-docx
+gunicorn
+openpyxl
+xlrd
