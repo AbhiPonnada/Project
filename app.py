@@ -30,7 +30,6 @@ dict ={
     "start":['Category','Qualification Question','Qualification Question','1.Start Here']
 }
 
-
 def get_values(input):
     [a,b,c,d] = dict[input]
     sheet_name = d
@@ -48,7 +47,6 @@ def get_values(input):
 @app.route('/')
 def website():
     return render_template('website.html')
-
 
 @app.route('/<input>')
 def index(input):
@@ -104,13 +102,16 @@ def summary(input):
         
         summary_df = pd.DataFrame(summary_data)
         file_name = f"{user_name}_answers.xlsx"
-        file_path = f"C:/Users/Guest_User/Desktop/Database/Landscape details/{file_name}"
+        file_path = os.path.join('output', file_name)
+        
+        os.makedirs('output', exist_ok=True)  # Ensure the directory exists
         summary_df.to_excel(file_path, index=False)
 
         summary_text = "\n".join([f"{row['Question']}: {row['Answer']}" for _, row in summary_df.iterrows()])
         scope_suggestion = get_scope_suggestion(summary_text)
         word_file_name = f"{user_name}_scope_for_SAP.docx"
-        word_file_path = f"C:/Users/Guest_User/Desktop/Database/Landscape details/{word_file_name}"
+        word_file_path = os.path.join('output', word_file_name)
+        
         doc = Document()
         doc.add_heading("Scope for SAP", level=1)
         doc.add_paragraph(scope_suggestion)
