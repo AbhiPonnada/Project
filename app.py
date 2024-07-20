@@ -10,7 +10,7 @@ app = Flask(__name__)
 app.secret_key = 'your_secret_key'
 
 # Load the Excel file
-xls = pd.ExcelFile(r"data/data.xlsx")
+xls = pd.ExcelFile(r"data/data2.xlsx")
 
 try:
     palm.configure(api_key="AIzaSyB-N4ZN2Hd7g3ftjPT23lgLUdUxph1-gkk")  # Replace with your actual API key
