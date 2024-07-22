@@ -31,7 +31,7 @@ dict ={
     "project":['Type ','Question ','Question ','15.Project Systems  '],
     "start":['Category','Qualification Question','Qualification Question','1.Start Here'],
     "organisation":['Category','Questions','Questions','4.Organisation Structure'],
-    "human":['Category','Questions','Questions','14.Human Resources']
+    "human":['Category ','Questions','Questions','14.Human Resources']
 }
 
 def get_values(input):
