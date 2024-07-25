@@ -1,9 +1,8 @@
-from flask import Flask, render_template, request, redirect, url_for, flash, session, jsonify
+from flask import Flask, render_template, request, redirect, url_for, flash, session, jsonify, send_file
 import pandas as pd
 import google.generativeai as palm
 from docx import Document
 import os
-from flask import send_file
 import shutil
 
 app = Flask(__name__)
@@ -31,7 +30,7 @@ dict ={
     "project":['Type ','Question ','Question ','15.Project Systems  '],
     "start":['Category','Qualification Question','Qualification Question','1.Start Here'],
     "organisation":['Category','Questions','Questions','4.Organisation Structure'],
-    "human":['Type ','Question ','Question ','14.Human Resources ']
+    "human":['Type ','Question ','Question ','14.Human Resources']
 }
 
 def get_values(input):
@@ -47,6 +46,10 @@ def get_values(input):
         for category, questions in questions_df.groupby('Category')
     }
     return a,b,c,d, questions_by_category
+
+@app.route('/favicon.ico')
+def favicon():
+    return send_file('static/favicon.ico')
 
 @app.route('/')
 def website():
@@ -156,3 +159,6 @@ def download_output():
     zip_file = 'results.zip'
     shutil.make_archive('results', 'zip', output_folder)
     return send_file(zip_file, as_attachment=True, download_name='results.zip')
+
+if __name__ == '__main__':
+    app.run(debug=True)
