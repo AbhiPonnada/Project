@@ -10,7 +10,7 @@ app = Flask(__name__)
 app.secret_key = 'your_secret_key'
 
 # Load the Excel file
-xls = pd.ExcelFile(r"data/data2.xlsx")
+xls = pd.ExcelFile(r"data/data3.xlsx")
 
 try:
     palm.configure(api_key="AIzaSyB-N4ZN2Hd7g3ftjPT23lgLUdUxph1-gkk")  # Replace with your actual API key
@@ -31,7 +31,7 @@ dict ={
     "project":['Type ','Question ','Question ','15.Project Systems  '],
     "start":['Category','Qualification Question','Qualification Question','1.Start Here'],
     "organisation":['Category','Questions','Questions','4.Organisation Structure'],
-    "human":['Category','Questions ','Questions ','14.Human Resources']
+    "human":['Type ','Question ','Question ','14.Human Resources']
 }
 
 def get_values(input):
