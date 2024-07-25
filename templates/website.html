@@ -18,25 +18,17 @@
       height: 100vh;
     }
 
-    .logo {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100px; /* Width of the logo */
-            z-index: 1000; /* Ensure the logo stays on top */
-    }
     .logo-container {
-        display: flex;
-        justify-content: center; /* Center the logo horizontally */
-        align-items: center; /* Center the logo vertically */
-        height: 100vh; /* Full height of the viewport */
-    }
-    
-    .logo1 {
-        width: 200px; /* Adjust the width as needed */
-        height: auto; /* Maintain aspect ratio */
+      display: flex;
+      justify-content: center; /* Center the logo horizontally */
+      align-items: center; /* Center the logo vertically */
+      height: 30vh; /* Adjust the height to fit your design */
     }
 
+    .logo {
+      width: auto; /* Maintain aspect ratio */
+      height: 100%; /* Adjust the height to fit your design */
+    }
 
     .search-bar {
       display: flex;
@@ -96,9 +88,9 @@
   </style>
 </head>
 <body>
-    <img src="{{ url_for('static', filename='nttdata.png') }}" alt="Logo" class="logo">
+  <div class="container">
     <div class="logo-container">
-      <img src="{{ url_for('static', filename='nttdata2.png') }}" alt="Logo" class="logo1">
+      <img src="{{ url_for('static', filename='nttdata.png') }}" alt="NTT DATA" class="logo">
     </div>
     <div class="search-bar">
       <i class="search-icon fa fa-search"></i>
@@ -149,7 +141,7 @@
       </a>
       <a href="/plant" class="shortcut">
         <i class="shortcut-icon fa fa-code-branch"></i>
-        <div class="shortcut-label">Plant Maintanence</div>
+        <div class="shortcut-label">Plant Maintenance</div>
       </a>
       <a href="/finance" class="shortcut">
         <i class="shortcut-icon fa fa-robot"></i>
