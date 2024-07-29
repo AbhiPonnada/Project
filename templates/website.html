@@ -30,6 +30,27 @@
       height: 100%; /* Adjust the height to fit your design */
     }
 
+    .search-bar {
+      display: flex;
+      align-items: center;
+      padding: 1rem;
+      border-radius: 3rem;
+      background-color: #fff;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      margin-bottom: 2rem;
+    }
+
+    .search-icon {
+      margin-right: 1rem;
+    }
+
+    .search-input {
+      border: none;
+      outline: none;
+      font-size: 1.2rem;
+      flex: 1;
+    }
+
     .shortcuts {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -70,6 +91,12 @@
   <div class="container">
     <div class="logo-container">
       <img src="{{ url_for('static', filename='nttdata.png') }}" alt="NTT DATA" class="logo">
+    </div>
+    <div class="search-bar">
+      <i class="search-icon fa fa-search"></i>
+      <input type="text" class="search-input" placeholder="Search Module...">
+      <i class="fa fa-microphone"></i>
+      <i class="fa fa-camera"></i>
     </div>
     <div class="shortcuts">
       <a href="/start" class="shortcut">
