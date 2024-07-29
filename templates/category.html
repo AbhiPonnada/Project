@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=devicwidth, initial-scale=1.0">
     <title>Category - {{ category }}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -98,7 +98,9 @@
     </script>
 </head>
 <body>
-    <img src="{{ url_for('static', filename='NTT_Data-Logo.jpg') }}" alt="Logo" class="logo">
+    <a href="{{ url_for('website') }}">
+        <img src="{{ url_for('static', filename='NTT_Data-Logo.jpg') }}" alt="Logo" class="logo">
+    </a>
     <div class="container">
         <h1>Category: {{ category }}</h1>
         <form method="post">
