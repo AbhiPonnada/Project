@@ -57,7 +57,7 @@
             border: 1px solid #ced4da;
             border-radius: 4px;
         }
-        button[type="submit"], .back-link {
+        button[type="button"], .back-link {
             display: inline-block;
             padding: 10px 20px;
             margin-top: 10px;
@@ -69,7 +69,7 @@
             cursor: pointer;
             transition: background-color 0.3s ease;
         }
-        button[type="submit"]:hover, .back-link:hover {
+        button[type="button"]:hover, .back-link:hover {
             background-color: #0056b3;
         }
         .back-link {
@@ -85,13 +85,15 @@
                 event.preventDefault();
                 let button = $(this);
                 let questionIndex = button.attr("name").split("_")[1];
-                let question = $(label[for='answer_${questionIndex}']).text().split(": ")[1];
+                let question = $(`#answer_${questionIndex}`).prev('label').text().split(": ")[1];
 
-                console.log(Requesting suggestion for question: ${question});
+                console.log(`Requesting suggestion for question: ${question}`);
 
-                $.post("{{ url_for('suggestion') }}", {question: question}, function(data) {
-                    console.log(Received suggestion: ${data.suggestion});
-                    $(#suggestion_text_${questionIndex}).val(data.suggestion);
+                $.post("{{ url_for('suggestion') }}", { question: question }, function(data) {
+                    console.log(`Received suggestion: ${data.suggestion}`);
+                    $(`#suggestion_text_${questionIndex}`).val(data.suggestion);
+                }).fail(function() {
+                    console.log("Error requesting suggestion.");
                 });
             });
         });
@@ -106,7 +108,7 @@
             <div class="question">
                 <label for="answer_{{ i }}">Q{{ i + 1 }}: {{ question }}</label>
                 <input type="text" name="answer_{{ i }}" id="answer_{{ i }}" value="{{ user_answers[i] }}">
-                <button type="submit" name="suggestion_{{ i }}">Suggestion</button>
+                <button type="button" name="suggestion_{{ i }}">Suggestion</button>
                 <textarea id="suggestion_text_{{ i }}" placeholder="Generated suggestion will appear here...">{{ suggestions[i] }}</textarea>
             </div>
             {% endfor %}
