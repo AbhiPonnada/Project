@@ -7,7 +7,77 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
-        /* Your existing CSS */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            position: relative;
+        }
+        h1 {
+            color: #343a40;
+            text-align: center;
+            margin-top: 60px; /* Adjust for logo height */
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        .logo {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100px; /* Width of the logo */
+            z-index: 1000; /* Ensure the logo stays on top */
+        }
+        .question {
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            background-color: #f1f1f1;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 8px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+        }
+        button[type="submit"], .back-link {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-top: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button[type="submit"]:hover, .back-link:hover {
+            background-color: #0056b3;
+        }
+        .back-link {
+            display: block;
+            text-decoration: none;
+            margin-top: 20px;
+            text-align: center;
+        }
     </style>
     <script>
         $(document).ready(function() {
@@ -15,13 +85,13 @@
                 event.preventDefault();
                 let button = $(this);
                 let questionIndex = button.attr("name").split("_")[1];
-                let question = $("label[for='answer_" + questionIndex + "']").text().split(": ")[1];
+                let question = $(label[for='answer_${questionIndex}']).text().split(": ")[1];
 
-                console.log(`Requesting suggestion for question: ${question}`);
+                console.log(Requesting suggestion for question: ${question});
 
                 $.post("{{ url_for('suggestion') }}", {question: question}, function(data) {
-                    console.log(`Received suggestion: ${data.suggestion}`);
-                    $("#suggestion_text_" + questionIndex).val(data.suggestion);
+                    console.log(Received suggestion: ${data.suggestion});
+                    $(#suggestion_text_${questionIndex}).val(data.suggestion);
                 });
             });
         });
