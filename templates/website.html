@@ -20,14 +20,12 @@
 
     .logo-container {
       display: flex;
-      justify-content: center; /* Center the logo horizontally */
-      align-items: center; /* Center the logo vertically */
+      justify-content: center; /* Center the text horizontally */
+      align-items: center; /* Center the text vertically */
       height: 30vh; /* Adjust the height to fit your design */
-    }
-
-    .logo {
-      width: auto; /* Maintain aspect ratio */
-      height: 100%; /* Adjust the height to fit your design */
+      font-size: 24px;
+      font-weight: bold;
+      color: #343a40;
     }
 
     .shortcuts {
@@ -68,9 +66,7 @@
 </head>
 <body>
   <div class="container">
-    <div class="logo-container">
-      <img src="{{ url_for('static', filename='nttdata3.png') }}" alt="NTT DATA" class="logo">
-    </div>
+    <div class="logo-container">AI Based Discovery Questions</div>
     <div class="shortcuts">
       <a href="/start" class="shortcut">
         <i class="shortcut-icon fa fa-eye-slash"></i>
