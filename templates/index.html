@@ -21,17 +21,19 @@
             border-radius: 8px;
             position: relative;
         }
-        .logo {
+        .header-text {
             position: absolute;
             top: 20px;
             left: 20px;
-            width: 150px; /* Increased the width */
+            font-size: 20px;
+            font-weight: bold;
+            color: #343a40;
         }
         h1 {
             color: #343a40;
             text-align: center;
-            margin-top: 0; /* Ensure no extra space above the title */
-            padding-top: 60px; /* Adjust for logo height */
+            margin-top: 0;
+            padding-top: 60px; 
         }
         h2 {
             color: #495057;
@@ -71,7 +73,7 @@
 </head>
 <body>
     <div class="container">
-        <img src="{{ url_for('static', filename='NTT_Data-Logo.jpg') }}" alt="Logo" class="logo">
+        <div class="header-text">AI Based Discovery Questions</div>
         <h1>{{title}}</h1>
         <h2>Categories</h2>
         <ul>
