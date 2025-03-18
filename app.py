@@ -16,25 +16,25 @@ try:
 except Exception as e:
     print(f"Error initializing Google Generative AI: {e}")
 
-dict ={
+dict = {
     "landscape": ['Component', 'Query', 'Query', '3.Landscape Details'],
-    "materials": [ 'Type ', 'Question', 'Question', '5.Materials Management'],
-    "production":['Type','Question','Question','6.Production Planning'],
-    "quality":['Type ','Question','Question','7.Quality Management'],
-    "warehouse":['Type','Question ','Question ','8.Warehouse Management'],
-    "sales":['Type ','Question ','Question ','9.Sales Distribution'],
-    "transportation":['Type ','Question ','Question ','10.Transportation Management'],
-    "plant":['Type', 'Question', 'Question','11.Plant Maintenance'],
-    "finance":['Process','Scope Question','Scope Question','12.Finance'],
-    "control":['Sub-Process','Scope Question','Scope Question','13.Controlling,Treasury'],
-    "project":['Type ','Question ','Question ','15.Project Systems  '],
-    "start":['Category','Qualification Question','Qualification Question','1.Start Here'],
-    "organisation":['Category','Questions','Questions','4.Organisation Structure'],
-    "human":['Type ','Question ','Question ','14.Human Resources ']
+    "materials": ['Type ', 'Question', 'Question', '5.Materials Management'],
+    "production": ['Type', 'Question', 'Question', '6.Production Planning'],
+    "quality": ['Type ', 'Question', 'Question', '7.Quality Management'],
+    "warehouse": ['Type', 'Question ', 'Question ', '8.Warehouse Management'],
+    "sales": ['Type ', 'Question ', 'Question ', '9.Sales Distribution'],
+    "transportation": ['Type ', 'Question ', 'Question ', '10.Transportation Management'],
+    "plant": ['Type', 'Question', 'Question', '11.Plant Maintenance'],
+    "finance": ['Process', 'Scope Question', 'Scope Question', '12.Finance'],
+    "control": ['Sub-Process', 'Scope Question', 'Scope Question', '13.Controlling,Treasury'],
+    "project": ['Type ', 'Question ', 'Question ', '15.Project Systems  '],
+    "start": ['Category', 'Qualification Question', 'Qualification Question', '1.Start Here'],
+    "organisation": ['Category', 'Questions', 'Questions', '4.Organisation Structure'],
+    "human": ['Type ', 'Question ', 'Question ', '14.Human Resources ']
 }
 
 def get_values(input):
-    [a,b,c,d] = dict[input]
+    [a, b, c, d] = dict[input]
     sheet_name = d
     df = pd.read_excel(xls, sheet_name)
     
@@ -45,7 +45,7 @@ def get_values(input):
         category: questions[c].tolist()
         for category, questions in questions_df.groupby('Category')
     }
-    return a,b,c,d, questions_by_category
+    return a, b, c, d, questions_by_category
 
 @app.route('/favicon.ico')
 def favicon():
@@ -57,16 +57,16 @@ def website():
 
 @app.route('/<input>')
 def index(input):
-    a,b,c,d, questions_by_category = get_values(input)
+    a, b, c, d, questions_by_category = get_values(input)
     sheet_name = d
     
     title = sheet_name.split('.')[1]
     categories = list(questions_by_category.keys())
-    return render_template('index.html', input = input, title = title, categories=categories)
+    return render_template('index.html', input=input, title=title, categories=categories)
 
 @app.route('/<input>/<category>', methods=['GET', 'POST'])
 def category(input, category):
-    a,b,c,d, questions_by_category = get_values(input)
+    a, b, c, d, questions_by_category = get_values(input)
     session['user_answers'] = {cat: [""] * len(questions) for cat, questions in questions_by_category.items()}
     
     questions = questions_by_category[category]
@@ -79,9 +79,9 @@ def category(input, category):
         
         session['user_answers'][category] = user_answers
         flash(f"Answers for {category} saved successfully!", 'success')
-        return redirect(url_for('index', input= input))
+        return redirect(url_for('index', input=input))
     
-    return render_template('category.html', input= input, category=category, questions=questions, user_answers=user_answers, suggestions=suggestions, enumerate=enumerate)
+    return render_template('category.html', input=input, category=category, questions=questions, user_answers=user_answers, suggestions=suggestions, enumerate=enumerate)
 
 @app.route('/suggestion', methods=['POST'])
 def suggestion():
@@ -95,9 +95,11 @@ def suggestion():
 def summary(input):
     if 'user_answers' not in session:
         flash("No answers available to display in summary.", 'warning')
-        return redirect(url_for('index', input= input))
-    a,b,c,d, questions_by_category = get_values(input)
+        return redirect(url_for('index', input=input))
+    
+    a, b, c, d, questions_by_category = get_values(input)
     summary_data = []
+
     if request.method == 'POST':
         user_name = request.form['user_name']
        
@@ -135,23 +137,27 @@ def thank_you():
 
 def get_suggestion(question):
     try:
-        response = palm.generate_text(
+        response = palm.generate_content(
             model='models/text-bison-001',
             prompt=f"Provide a suggestion for the following question according to Production Planning in SAP: {question}",
-            max_output_tokens=150
+            temperature=0.7
         )
-        return response.result
+        return response.text if response and hasattr(response, 'text') else "No suggestion available."
     except Exception as e:
         print(f"Error generating suggestion: {e}")  # Log the error
         return f"Error: {e}"
 
 def get_scope_suggestion(summary_text):
-    response = palm.generate_text(
-        model='models/text-bison-001',
-        prompt=f"Based on the following answers, what is the scope for SAP?\n\n{summary_text}",
-        max_output_tokens=300
-    )
-    return response.result
+    try:
+        response = palm.generate_content(
+            model='models/text-bison-001',
+            prompt=f"Based on the following answers, what is the scope for SAP?\n\n{summary_text}",
+            temperature=0.7
+        )
+        return response.text if response and hasattr(response, 'text') else "No scope suggestion available."
+    except Exception as e:
+        print(f"Error generating scope suggestion: {e}")
+        return f"Error: {e}"
 
 @app.route('/download')
 def download_output():
