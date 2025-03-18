@@ -12,7 +12,7 @@ app.secret_key = 'your_secret_key'
 xls = pd.ExcelFile(r"data/data4.xlsx")
 
 try:
-    palm.configure(api_key="AIzaSyB-N4ZN2Hd7g3ftjPT23lgLUdUxph1-gkk")  # Replace with your actual API key
+    palm.configure(api_key="AIzaSyCaQK9XmNrPAEMoRHTMJKvLw-j9ix-YtiM")  # Replace with your actual API key
 except Exception as e:
     print(f"Error initializing Google Generative AI: {e}")
 
